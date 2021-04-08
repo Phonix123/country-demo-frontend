@@ -29,9 +29,6 @@ export default {
   },
   computed: {},
   created() {
-    //console.log("Login in kibana");
-    //login();
-    //console.log("Login in kibana done");
     if (process.env.NODE_ENV === "development") {
       this.$store.commit("setUserMeta", {
         firstname: "John",
@@ -42,13 +39,7 @@ export default {
       console.log(
         "Development user info roles: " + this.$store.getters.getUserMeta.roles
       );
-    } /*else {
-      fetchRoles().then(data => {
-        if (data) {
-          this.$store.commit("setUserMeta", data);
-        }
-      });
-    }*/
+    }
   },
   mounted() {
     this.$vuetify.theme.dark = this.$store.getters.isDarkTheme; // necessary to apply on refresh

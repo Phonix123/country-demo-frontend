@@ -28,10 +28,7 @@
                 :search="search"
                 :custom-filter="filterText"
                 loading-text="A carregar lista de paises do mundo..."
-              >
-                <!-- <template v-slot:[`item.name`]="{ item }">
-                {{ item.name.text }}
-              </template> --><template v-slot:top>
+                ><template v-slot:top>
                   <v-text-field
                     v-model="search"
                     label="Pesquisar"
