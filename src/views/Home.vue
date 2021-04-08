@@ -233,14 +233,20 @@ export default {
     }
   },
   mounted() {
-    getListOfCountries().then(response => {
-      //console.log(response);
-      this.dataList = response.map(element => {
-        //console.log(element.info);
-        return element.info;
+    getListOfCountries()
+      .then(response => {
+        //console.log(response);
+        this.dataList = response.map(element => {
+          //console.log(element.info);
+          return element.info;
+        });
+        this.loading = false;
+      })
+      .error(err => {
+        alert("Unauthorized");
+        console.log(err);
+        this.loading = false;
       });
-      this.loading = false;
-    });
   },
   methods: {
     getWeatherIcon(icon) {
