@@ -25,11 +25,19 @@
                 :hide-default-footer="false"
                 :loading="loading"
                 @click:row="handleClick"
+                :search="search"
+                :custom-filter="filterText"
                 loading-text="A carregar lista de paises do mundo..."
               >
                 <!-- <template v-slot:[`item.name`]="{ item }">
                 {{ item.name.text }}
-              </template> -->
+              </template> --><template v-slot:top>
+                  <v-text-field
+                    v-model="search"
+                    label="Pesquisar"
+                    class="mx-4"
+                  ></v-text-field>
+                </template>
                 <template v-slot:[`item.languages`]="{ item }">
                   {{
                     item.languages
@@ -195,6 +203,7 @@ export default {
   data: () => ({
     loading: true,
     loadingWeather: false,
+    search: "",
     selected: {
       info: { name: "", capital: "" },
       weather: null
@@ -214,47 +223,7 @@ export default {
         text: "ICAO",
         sortable: false,
         value: "alpha3Code"
-      } /*,
-      {
-        text: "Capital",
-        sortable: false,
-        value: "capital"
-      },
-      {
-        text: "Region",
-        sortable: false,
-        value: "region"
-      },
-      {
-        text: "Population",
-        sortable: false,
-        value: "population"
-      },
-      {
-        text: "Area",
-        sortable: false,
-        value: "area"
-      },
-      {
-        text: "Timezones",
-        sortable: false,
-        value: "timezones"
-      },
-      {
-        text: "Languages",
-        sortable: false,
-        value: "languages"
-      },
-      {
-        text: "Latitude/Longitude",
-        sortable: false,
-        value: "latlng"
-      },
-      {
-        text: "Currencie(s)",
-        sortable: false,
-        value: "currencies"
-      }*/
+      }
     ],
     dataList: []
   }),
@@ -286,6 +255,15 @@ export default {
 
         this.loadingWeather = false;
       });
+    },
+    filterText(value, search, item) {
+      item;
+      return (
+        value != null &&
+        search != null &&
+        typeof value === "string" &&
+        value.toString().indexOf(search) !== -1
+      );
     }
   }
 };
